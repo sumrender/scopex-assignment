@@ -1,5 +1,6 @@
 const express = require("express");
 const path = require("path");
+require("dotenv").config();
 const connectDB = require("./utils/db");
 const userRoutes = require("./routes/userRoutes");
 const addFakeDataToDB = require("./utils/genFakeData");
