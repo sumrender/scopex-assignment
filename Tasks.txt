@@ -1,0 +1,9 @@
+Task 1:
+The database has collection called transfers and users (see attached file). Find all transfers for a particular user and provide a summary for last 1 year how many transfers have been performed and how much money is transferred per month. ( NODE.JS and mongo)
+- Pass data to Mongodb and retrieve from there
+- show summary as a plot
+- You could more dummy data for better plotting.
+
+
+Task2:
+Using Binance public APIs, get any 10 coin/token prices for last 48 hours and generate candle stick plot for each coin / currency (python).

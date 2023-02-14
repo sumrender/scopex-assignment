@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    <title>Scopex Task 1</title>
+  </head>
+  <body>
+    <div class="example-users">
+      <p>Example User Ids</p>
+      <ul>
+        <li><p>62d816b45b18513178b683c8</p></li>
+        <li><p>62d7d80a5b18513178b683c0</p></li>
+      </ul>
+    </div>
+    <div class="input">
+      Enter ID to get summary:
+      <input required type="text" name="userId" id="user-id" />
+      <button id="get-summary">Get Summary</button>
+    </div>
+
+    <div id="summary">
+      <canvas id="myChart" style="width: 100%; max-width: 600px"></canvas>
+    </div>
+  </body>
+  <script>
+    userIdInput = document.getElementById("user-id");
+    summaryBtn = document.getElementById("get-summary");
+    summary = document.getElementById("summary");
+    apiBtn = document.getElementById("api");
+
+    function createChart(sentData, recvData) {
+      var xValues = [
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dec",
+      ];
+
+      new Chart("myChart", {
+        type: "line",
+        data: {
+          labels: xValues,
+          datasets: [
+            {
+              label: "Money Sent",
+              data: sentData,
+              borderColor: "red",
+              fill: false,
+            },
+            {
+              label: "Money Received",
+              data: recvData,
+              borderColor: "green",
+              fill: false,
+            },
+          ],
+        },
+      });
+    }
+
+    summaryBtn.onclick = () => {
+      // let userId = "62d816b45b18513178b683c8";
+      let userId = userIdInput.value;
+      let url = "api/transfers/" + userId;
+      fetch(url)
+        .then((response) => response.json())
+        .then((data) => {
+          const { sentData, recvData } = data;
+          createChart(sentData, recvData);
+          console.log(data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+  </script>
+</html>
